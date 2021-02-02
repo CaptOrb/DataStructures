@@ -118,7 +118,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
             Node<E> prev = head;
 
-            for(int j = 1; j < i -1; j++){
+            for(int j = 1; j < i - 1; j++){
                 prev = prev.next;
             }
             // in old index i - replace with new val
@@ -257,7 +257,6 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * This exists for debugging purposes only.
      */
     public String toString() {
-        // TODO
         StringBuilder s = new StringBuilder();
         for (E item : this)
             s.append(item + " ");
