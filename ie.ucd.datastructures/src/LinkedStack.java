@@ -1,38 +1,49 @@
 public class LinkedStack<E> implements Stack<E> {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	private SinglyLinkedList<E> list = new SinglyLinkedList<>();
+	public LinkedStack(){}
 
-	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.size() == 0;
 	}
 
 	@Override
 	public void push(E e) {
-		// TODO Auto-generated method stub
-		
+		list.addFirst(e);
 	}
 
 	@Override
 	public E top() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.first();
 	}
 
 	@Override
 	public E pop() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.removeFirst();
+	}
+
+	public static void main(String[] args) {
+
+		LinkedStack<String> sll = new LinkedStack<>();
+
+		String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+		for (String s : alphabet) {
+			sll.push(s);
+		}
+
+		System.out.println(sll.top());
+		sll.pop();
+
+		System.out.println(sll.top());
+
 	}
 
 }

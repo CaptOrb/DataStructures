@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DoublyLinkedListTest {
 
 	@Test
-	void testSize() {
+	public void testSize() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		assertEquals(0, ll.size());
 		ll.addFirst(0);
@@ -15,7 +15,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testIsEmpty() {
+	public void testIsEmpty() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		assertEquals(true, ll.isEmpty());
 		ll.addFirst(0);
@@ -25,7 +25,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testFirst() {
+	public void testFirst() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		ll.addFirst(-1);
 		assertEquals(-1, ll.first());
@@ -37,7 +37,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testLast() {
+	public void testLast() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		ll.addFirst(-1);
 
@@ -52,7 +52,7 @@ class DoublyLinkedListTest {
 
 
 	@Test
-	void testRemoveLast() {
+	public void testRemoveLast() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		ll.addFirst(-1);
 		ll.addFirst(-2);
@@ -60,7 +60,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testGet() {
+	public void testGet() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
@@ -68,7 +68,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testRemove() {
+	public void testRemove() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
@@ -77,7 +77,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testAdd() {
+	public void testAdd() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
@@ -86,7 +86,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testToString() {
+	public void testToString() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
@@ -94,7 +94,7 @@ class DoublyLinkedListTest {
 	}
 
 	@Test
-	void testIterator() {
+	public void testIterator() {
 		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 		
