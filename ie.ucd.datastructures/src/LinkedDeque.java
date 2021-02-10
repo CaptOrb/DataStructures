@@ -1,56 +1,65 @@
 public class LinkedDeque<E> implements Deque<E> {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	private DoublyLinkedList<E> list = new DoublyLinkedList<>();
 
-	}
+	public LinkedDeque(){}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.isEmpty();
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.first();
 	}
 
 	@Override
 	public E last() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.last();
 	}
 
 	@Override
 	public void addFirst(E e) {
-		// TODO Auto-generated method stub
-		
+		list.addFirst(e);
 	}
 
 	@Override
 	public void addLast(E e) {
-		// TODO Auto-generated method stub
-		
+		list.addLast(e);
+
 	}
 
 	@Override
 	public E removeFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.removeFirst();
 	}
 
 	@Override
 	public E removeLast() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.removeLast();
+	}
+
+	public static void main(String[] args) {
+		LinkedDeque<Integer> ex = new LinkedDeque<>();
+
+		ex.addFirst(5);
+
+		ex.addLast(20);
+
+		System.out.println("At the start of the queue is " + ex.first());
+
+		ex.addFirst(10);
+
+		System.out.println("At the start of the queue is  " + ex.first());
+
+		System.out.println("At the end of the queue is  " + ex.last());
+
 	}
 
 }

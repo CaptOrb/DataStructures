@@ -1,38 +1,46 @@
 public class LinkedQueue<E> implements Queue<E> {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	private SinglyLinkedList<E> list = new SinglyLinkedList<>();
 
-	}
+	public LinkedQueue(){}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.isEmpty();
 	}
 
 	@Override
 	public void enqueue(E e) {
-		// TODO Auto-generated method stub
-		
+		list.addLast(e);
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.first();
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.removeFirst();
 	}
 
+	public static void main(String[] args) {
+		ArrayQueue<Integer> ex = new ArrayQueue<Integer>(1000);
+
+		ex.enqueue(5);
+
+		ex.enqueue(10);
+
+		System.out.println("At the start of the queue is " + ex.first());
+
+		ex.dequeue();
+
+		System.out.println("t the start of the queue is  " + ex.first());
+
+	}
 }

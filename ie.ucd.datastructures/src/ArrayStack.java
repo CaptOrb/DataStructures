@@ -1,7 +1,7 @@
 public class ArrayStack<E> implements Stack<E> {
     private static final int CAPACITY = 1000;
     private E[] data;
-    private int t = -1;
+    private int t = -1; // index of top element
 
     public ArrayStack() {
         this(CAPACITY);
@@ -24,6 +24,8 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public void push(E e) {
         if (size() == data.length) throw new IllegalStateException("Stack is full");
+
+        // we increment t before storing new element
         data[++t] = e;
     }
 
