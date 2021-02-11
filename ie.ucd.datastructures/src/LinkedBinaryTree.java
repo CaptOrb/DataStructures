@@ -27,42 +27,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     // constructor
 
 
-    public static void main(String[] args) {
-		LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
-
-
-		  // Direct construction of Tree Position<Integer> root = bt.addRoot(12);
-		  Position<Integer> p1 = bt.addLeft(root, 25); Position<Integer> p2 =
-		  bt.addRight(root, 31);
-
-		  Position<Integer> p3 = bt.addLeft(p1, 58); bt.addRight(p1, 36);
-
-		  Position<Integer> p5 = bt.addLeft(p2, 42); bt.addRight(p2, 90);
-
-		  Position<Integer> p4 = bt.addLeft(p3, 62); bt.addRight(p3, 75);
-
-
-		  // Can you write a level order constructor?
-		// Level order construction
-		// Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
-		// bt.createLevelOrder(arr);
-
-		System.out.println("bt inorder: " + bt.size() + " " + bt.inorder());
-		System.out.println("bt preorder: " + bt.size() + " " + bt.preorder());
-		System.out.println("bt preorder: " + bt.size() + " " + bt.postorder());
-
-		System.out.println("bt height: " + bt.height(bt.root()));
-		System.out.println("bt depth: " + bt.depth(bt.root()));
-
-		System.out.println(bt.toString());
-    }
-
-
     /**
      * Factory function to create a new node storing element e.
      */
     protected Node<E> createNode(E e, Node<E> parent, Node<E> left, Node<E> right) {
-        return new Node<E>(e, parent, left, right);
+        root = new Node<E>(e, parent, left, right);
+        size++;
+        return root;
     }
 
     /**
@@ -113,8 +84,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public Position<E> parent(Position<E> p) throws IllegalArgumentException {
-    	// TODO
-		return null;
+        Node<E>node = validate(p);
+
+        return node.getParent();
     }
 
     /**
@@ -126,8 +98,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public Position<E> left(Position<E> p) throws IllegalArgumentException {
-    	// TODO
-		return null;
+        return validate(p).left;
     }
 
     /**
@@ -139,8 +110,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public Position<E> right(Position<E> p) throws IllegalArgumentException {
-        // TODO
-		return null;
+        return validate(p).right;
     }
 
     /**
@@ -151,8 +121,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalStateException if the tree is not empty
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
-        // TODO
-		return null;
+
+        if(root !=null){
+            throw  new IllegalStateException("Root already exists");
+        }
+         root = createNode(e, null,null,null);
+         size++;
+		return root;
     }
 
 
@@ -167,8 +142,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p already has a left child
      */
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
-    	// TODO
-    	return null;
+
+        Node<E> parent  = validate(p);
+
+        if(parent.getLeft() != null){
+            throw new IllegalArgumentException("P already has left child");
+        }
+        //(Node<E>) p
+
+        Node<E> n = createNode(e, (Node<E>) p, null,null);
+
+        parent.setLeft(n);
+
+        size++;
+    	return n;
     }
 
     /**
@@ -182,8 +169,19 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p already has a right child
      */
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
-    	// TODO
-		return null;
+
+        Node<E> parent  = validate(p);
+
+        if(parent.getRight() != null){
+            throw new IllegalArgumentException("P already has left child");
+        }
+
+        Node<E> n = createNode(e, (Node<E>) p, null,null);
+
+        parent.setRight(n);
+
+        size++;
+        return n;
     }
 
     /**
@@ -211,8 +209,30 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p is not a leaf
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
-        // TODO
+       Node<E>node = validate(p);
+
+       if(isInternal(p))
+           throw new IllegalArgumentException("p must be a leaf");
+
+       size += t1.size() + t2.size();
+       if(!t1.isEmpty()){
+           // attach t1 as left subtree of node
+           t1.root.setParent(node);
+           node.setLeft(t1.root);
+
+           t1.root =null;
+           t1.size = 0;
+       }
+
+       if(!t2.isEmpty()){
+           // attach t2 as right subtree of node
+           t2.root.setParent(node);
+           node.setRight(t2.root);
+           t2.root = null;
+           t2.size = 0;
+       }
     }
+
 
     /**
      * Removes the node at Position p and replaces it with its child, if any.
@@ -267,14 +287,127 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     protected static class Node<E> implements Position<E> {
         private E element;
-        private Node<E> left, right, parent;
+        private Node<E> left;
+        private Node<E>right;
+        private Node<E> parent;
 
 
         public Node(E e, Node<E> p, Node<E> l, Node<E> r) {
-        	// TODO
+        	element = e;
+        	parent = p;
+        	left = l;
+        	right = r;
+
         }
 
-        // accessor
-		// TODO implement the class
+        @Override
+        public E getElement() throws IllegalStateException {
+            return element;
+        }
+
+       public Node<E> getLeft(){
+            return left;
+        }
+
+        public Node<E> getRight(){
+            return right;
+        }
+
+        public Node<E> getParent(){
+            return parent;
+        }
+
+        public void setElement(E element){
+            this.element = element;
+        }
+
+        public void setLeft(Node<E> left){
+            this.left = left;
+        }
+
+        public void setRight(Node<E> right){
+            this.right = right;
+        }
+
+        public void setParent(Node<E> parent){
+            this.parent = parent;
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("[");
+            sb.append(element);
+            sb.append(", ");
+
+            if(parent != null){
+                sb.append(parent.element);
+            }else
+                sb.append(" null");
+
+            sb.append(",");
+
+            if(left != null) {
+                sb.append(left.element);
+            }else
+            sb.append(" null");
+
+            sb.append(", ");
+
+            if(right != null) {
+                sb.append(right.element);
+            } else {
+                sb.append(" null");
+            }
+            sb.append("]");
+
+            return sb.toString();
+        }
+    }
+    public static void main(String[] args) {
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        // Direct construction of Tree
+        Position<Integer> root = bt.addRoot(12);
+
+        System.out.println("root " + root);
+
+        Position<Integer> p1 = bt.addLeft(root, 25);
+
+        System.out.println("p1: " + p1);
+
+        System.out.println("root " + root);
+
+        Position<Integer> p2 = bt.addRight(root, 31);
+
+        Position<Integer> p3 = bt.addLeft(p1, 58);
+
+        bt.addRight(p1, 36);
+
+        Position<Integer> p5 = bt.addLeft(p2, 42);
+
+        bt.addRight(p2, 90);
+
+        Position<Integer> p4 = bt.addLeft(p3, 62);
+
+        bt.addRight(p3, 75);
+
+        System.out.println("root " + root);
+
+       // System.out.println(bt.toString());
+
+        // Can you write a level order constructor?
+        // Level order construction
+        Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
+       //  bt.createLevelOrder(arr);
+
+        System.out.println("bt inorder: " + bt.size() + " " + bt.inorder());
+        System.out.println("bt preorder: " + bt.size() + " " + bt.preorder());
+        System.out.println("bt preorder: " + bt.size() + " " + bt.postorder());
+
+        System.out.println("bt height: " + bt.height(bt.root()));
+        System.out.println("bt depth: " + bt.depth(bt.root()));
+
+        System.out.println(bt.toString());
     }
 }
