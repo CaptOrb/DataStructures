@@ -27,6 +27,10 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             return data;
         }
 
+        public void setData(E data) {
+            this.data = data;
+        }
+
         public Node<E> getNext() {
             return next;
         }
@@ -139,7 +143,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             removeFirst();
         }
 
-        // TODO
+        size--;
         return null;
     }
 
@@ -220,17 +224,52 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * @return the removed element (or null if empty)
      */
     public E removeFirst() {
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
-        } else if (size == 1) {
-            head = null;
-            size--;
         } else {
+
+            // the element to be returned
+            E answer = head.getData();
+
+            // set new head of list
             head = head.getNext();
+
+            // decrement the size
             size--;
-            return head.getData();
+            return answer;
         }
-        return null;
+    }
+
+    public void reverse() {
+
+        // Create a new array stack
+        ArrayStack<E> stack = new ArrayStack<E>(size);
+
+        Node<E> curr = head;
+
+        int i = 0;
+
+        // iterate through the linked list
+        while (curr != null) {
+
+            // push the element to the stack
+            stack.push(curr.getData());
+
+            // Remove the element from the linked list
+            remove(i);
+
+            i++;
+            curr = curr.getNext();
+        }
+
+        i = 0;
+
+        // Pop the element from the stack and add it to the linked list
+        while (!stack.isEmpty()) {
+
+            add(i, stack.pop());
+            i++;
+        }
     }
 
 
@@ -295,9 +334,17 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
         for (String s : alphabet) {
             sll.addFirst(s);
-            sll.addLast(s);
+            //sll.addLast(s);
         }
-        System.out.println(sll.toString());
+         System.out.println(sll.toString());
+
+        for (String s : sll) {
+            System.out.print(s + ", ");
+        }
+
+        System.out.println();
+
+        sll.reverse();
 
         for (String s : sll) {
             System.out.print(s + ", ");
