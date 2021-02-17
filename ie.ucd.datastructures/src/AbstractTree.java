@@ -21,7 +21,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isInternal(Position<E> p) {
-        return (numChildren(p) > 0) ;
+        return (numChildren(p) > 0);
     }
 
     /**
@@ -33,8 +33,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isExternal(Position<E> p) {
-        // another guess
-        return (numChildren(p) == 0) ;
+        return (numChildren(p) == 0);
     }
 
     /**
@@ -59,7 +58,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     public int numChildren(Position<E> p) {
         int count = 0;
 
-        for (Position<E> m : children(p)){
+        for (Position<E> m : children(p)) {
             count++;
 
         }
@@ -75,7 +74,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     public int size() {
         int count = 0;
 
-        for (Position<E> m : positions()){
+        for (Position<E> m : positions()) {
             count++;
 
         }
@@ -196,7 +195,6 @@ public abstract class AbstractTree<E> implements Tree<E> {
         for (Position<E> c : children(p))
             postorderSubtree(c, snapshot);   // fill the snapshot recursively
 
-
         snapshot.add(p);
     }
 
@@ -218,15 +216,25 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @return iterable collection of the tree's positions in breadth-first order
      */
     public Iterable<Position<E>> breadthfirst() {
-        LinkedQueue<E> e = new LinkedQueue<E>();
+        List<Position<E>> snapshot = new ArrayList<>();
 
-        e.enqueue((E) root());
+        Queue<Position<E>> q = new LinkedQueue<>();
 
-       // while (!e.isEmpty()){
+        q.enqueue(root());
 
-        //}
-        return null;
+        while (!q.isEmpty()) {
+            Position<E> p = q.dequeue();
+
+            snapshot.add(p);
+
+            for (Position<E> c : children(p)) {
+                q.enqueue(c);
+            }
+        }
+
+        return snapshot;
     }
+
 
     //---------------- nested ElementIterator class ----------------
     /* This class adapts the iteration produced by positions() to return elements. */
