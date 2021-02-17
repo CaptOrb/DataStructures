@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Concrete implementation of a binary tree using a node-based, linked
  * structure.
  */
-public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> implements Comparable<E> {
+public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     static java.util.Random rnd = new java.util.Random();
     /**
@@ -187,13 +187,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> implements Compar
         return n;
     }
 
-    int getExternalNode(Position<E> p) {
-        if (parent(p) == null)
+    int getLeafCount() {
+        return getExternalNode(root);
+    }
+
+    int getExternalNode(Node<E> node) {
+        // base case, root node is null
+        if (node == null)
             return 0;
-        if (left(p) == null && right(p) == null)
+        // base case 2: root node is not null but it has no leaf nodes
+        if (node.getLeft() == null && node.getRight() == null)
             return 1;
         else
-            return getExternalNode(left(p)) + getExternalNode(right(p));
+            //
+            return getExternalNode(node.getLeft()) + getExternalNode(node.getRight());
     }
 
 
@@ -339,9 +346,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> implements Compar
         return p;
     }
 
-    @Override
-    public int compareTo(E o) {
-        return 0;
+    public String toBinaryTreeString() {
+        BinaryTreePrinter<E> btp = new BinaryTreePrinter<>(this);
+        return btp.print();
     }
 
 
@@ -482,6 +489,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> implements Compar
         System.out.println("bt height: " + bt.height(bt.root()));
         System.out.println("bt depth: " + bt.depth(bt.root()));
 
+        System.out.println(bt.getLeafCount() + " external nodes");
+
         System.out.println(bt.toString());
+
+        System.out.println();
+
+        System.out.println(bt.toBinaryTreeString());
+
     }
 }
