@@ -27,6 +27,10 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             return data;
         }
 
+        public void setData(E data) {
+            this.data = data;
+        }
+
         public Node<E> getNext() {
             return next;
         }
@@ -66,20 +70,21 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
     @Override
     public E get(int i) throws IndexOutOfBoundsException {
-        if (i < 0 || i > size - 1) {
-            throw new IndexOutOfBoundsException("Index is out of bounds");
-        } else {
 
-            Node<E> curr = head;
-
-            // transverse list until we reach i
-            for (int j = 0; j < i; j++) {
-                curr = curr.getNext();
-            }
-
-            // return the data in index i
-            return curr.getData();
+        if (head == null) {
+            return null;
         }
+
+        Node<E> curr = head;
+
+        // transverse list until we reach i
+        for (int j = 0; j < i ; j++) {
+            curr = curr.getNext();
+        }
+
+        // return the data in index i
+        return curr.getData();
+
     }
 
     // Replaces the element at index i with e, and returns the old element that was
@@ -90,7 +95,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         } else {
 
-            Node<E> temp = new Node<E>(e,head);
+            Node<E> temp = new Node<E>(e, head);
             Node<E> curr = head;
 
             // transverse list until we reach i
@@ -102,7 +107,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             temp.setNext(curr.getNext().getNext());
             curr.setNext(temp);
             // return the data in index i
-            return  curr.getNext().getData();
+            return curr.getNext().getData();
         }
     }
 
@@ -118,7 +123,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
             Node<E> prev = head;
 
-            for(int j = 1; j < i -1; j++){
+            for (int j = 0; j < i - 1; j++) {
                 prev = prev.next;
             }
             // in old index i - replace with new val
@@ -138,7 +143,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             removeFirst();
         }
 
-        // TODO
+        size--;
         return null;
     }
 
@@ -174,7 +179,6 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * @return element at the end of the list (or null if empty)
      */
     public E last() {
-        // TODO
         return get(size - 1);
     }
 
@@ -219,17 +223,52 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * @return the removed element (or null if empty)
      */
     public E removeFirst() {
-        if (size == 0) {
-            return null;
-        }
-        if (size == 1) {
-            head = null;
+        if (isEmpty()) {
             return null;
         } else {
+
+            // the element to be returned
+            E answer = head.getData();
+
+            // set new head of list
             head = head.getNext();
+
+            // decrement the size
+            size--;
+            return answer;
         }
-        size--;
-        return head.getData();
+    }
+
+    public void reverse() {
+
+        // Create a new array stack
+        ArrayStack<E> stack = new ArrayStack<E>(size);
+
+        Node<E> curr = head;
+
+        int i = 0;
+
+        // iterate through the linked list
+        while (curr != null) {
+
+            // push the element to the stack
+            stack.push(curr.getData());
+
+            // Remove the element from the linked list
+            remove(i);
+
+            i++;
+            curr = curr.getNext();
+        }
+
+        i = 0;
+
+        // Pop the element from the stack and add it to the linked list
+        while (!stack.isEmpty()) {
+
+            add(i, stack.pop());
+            i++;
+        }
     }
 
 
@@ -241,11 +280,10 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
     @SuppressWarnings({"unchecked"})
     public SinglyLinkedList<E> clone() throws CloneNotSupportedException {
-        // TODO
 
         SinglyLinkedList<E> twin = new SinglyLinkedList<E>();
         Node<E> temp = head;
-        while (temp != null){
+        while (temp != null) {
             twin.addLast(temp.getData());
             temp = temp.getNext();
         }
@@ -257,10 +295,12 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * This exists for debugging purposes only.
      */
     public String toString() {
-        // TODO
         StringBuilder s = new StringBuilder();
-        for (E item : this)
-            s.append(item + " ");
+        s.append("[");
+        for (E item : this) {
+            s.append(item).append(", ");
+        }
+        s.append("]");
         return s.toString();
     }
 
@@ -286,26 +326,25 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
     }
 
     public static void main(String[] args) throws CloneNotSupportedException {
-        SinglyLinkedList<Integer> ll = new SinglyLinkedList<Integer>();
-        ll.add(2,2);
-        ll.addFirst(0);
-        ll.addFirst(1);
-        ll.addFirst(3);
-        ll.addFirst(4);
-        ll.addFirst(5);
-        ll.add(3,2);
 
-        ll.addFirst(-100);
-        ll.addLast(+100);
+        SinglyLinkedList<String> sll = new SinglyLinkedList<String>();
 
-        ll.set(2,9);
-       // System.out.println(ll);
+        String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-        ll.clone();
+        for (String s : alphabet) {
+            sll.addFirst(s);
+            //sll.addLast(s);
+        }
+        System.out.println(sll.toString());
 
-        for (int s : ll) {
+        for (String s : sll) {
             System.out.print(s + ", ");
         }
+
+        System.out.println();
+
+        sll.reverse();
+
     }
 }
 
