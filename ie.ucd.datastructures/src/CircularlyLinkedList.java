@@ -81,7 +81,7 @@ public class CircularlyLinkedList<E> implements List<E> {
             Node<E> curr = tail;
 
             // transverse list until we reach i
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j <= i; j++) {
                 curr = curr.getNext();
             }
 
@@ -158,31 +158,28 @@ public class CircularlyLinkedList<E> implements List<E> {
         if (size == 0) {
             throw new IndexOutOfBoundsException();
         }
-        if (size == 1) {
-            removeFirst();
-        } else {
-            Node<E> curr = tail;
+        Node<E> curr = tail;
 
-            for (int j = 0; j <= i; j++) {
+        for (int j = 0; j <= i; j++) {
 
-                // have we found the element we want to remove?
-                if (i == j) {
+            // have we found the element we want to remove?
+            if (i == j) {
 
-                    // store the element to be deleted
-                    Node<E> temp = curr.getNext();
+                // store the element to be deleted
+                Node<E> temp = curr.getNext();
 
-                    // shift all subsequent elements in the list one position closer to the front.
-                    curr.setNext(curr.getNext().getNext());
-                    size--;
-                    // return the deleted element
-                    return temp.getData();
-                } else {
-                    // we have not found the element we wish to remove
-                    // so check if the next element in the SLL is the element we wish to remove
-                    curr = curr.getNext();
-                }
+                // shift all subsequent elements in the list one position closer to the front.
+                curr.setNext(curr.getNext().getNext());
+                size--;
+                // return the deleted element
+                return temp.getData();
+            } else {
+                // we have not found the element we wish to remove
+                // so check if the next element in the SLL is the element we wish to remove
+                curr = curr.getNext();
             }
         }
+
         return null;
     }
 
@@ -289,6 +286,8 @@ public class CircularlyLinkedList<E> implements List<E> {
         for (E item : this) {
             s.append(item).append(", ");
         }
+        if (s.length() > 2)
+            s.delete(s.length() - 2, s.length());
 
         s.append("]");
         return s.toString();
@@ -304,12 +303,16 @@ public class CircularlyLinkedList<E> implements List<E> {
             ll.addLast(s);
         }
 
+        System.out.println(ll.first());
+
         System.out.println(ll.toString());
+
+        System.out.println("Removed: " + ll.removeFirst());
+
+        System.out.println(ll.toString() + "\n\n");
 
         ll.rotate();
         ll.rotate();
-
-        System.out.println(ll.toString());
 
         for (String s : ll) {
             System.out.print(s + ", ");

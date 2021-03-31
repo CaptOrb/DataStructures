@@ -2,8 +2,7 @@ public class LinkedQueue<E> implements Queue<E> {
 
     private SinglyLinkedList<E> list = new SinglyLinkedList<>();
 
-    public LinkedQueue() {
-    }
+    public LinkedQueue() {}
 
     @Override
     public int size() {
@@ -56,6 +55,5 @@ public class LinkedQueue<E> implements Queue<E> {
         ex.dequeue();
 
         System.out.println("t the start of the queue is  " + ex.first());
-
     }
 }

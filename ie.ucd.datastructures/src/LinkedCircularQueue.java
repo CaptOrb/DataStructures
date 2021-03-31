@@ -8,39 +8,80 @@
 
 public class LinkedCircularQueue<E> implements Queue<E> {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    private final CircularlyLinkedList<E> cll = new CircularlyLinkedList<>();
 
-	}
+    @Override
+    public int size() {
+        return cll.size();
+    }
 
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public boolean isEmpty() {
+        return cll.isEmpty();
+    }
 
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public void enqueue(E e) {
+        cll.addLast(e);
+    }
 
-	@Override
-	public void enqueue(E e) {
-		// TODO Auto-generated method stub
+    @Override
+    public E first() {
+        return cll.first();
+    }
 
-	}
+    @Override
+    public E dequeue() {
+        return cll.removeFirst();
+    }
 
-	@Override
-	public E first() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void rotate() {
+        cll.rotate();
+    }
 
-	@Override
-	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String toString() {
+        return cll.toString();
+    }
 
+    public void outputIsEmpty() {
+        if (isEmpty()) {
+            System.out.println("The queue is empty");
+        } else {
+            System.out.println("The queue is not empty");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        LinkedCircularQueue<Integer> s = new LinkedCircularQueue<>();
+
+        s.outputIsEmpty();
+
+        System.out.println("Adding elements to queue");
+
+        for (int i = 0; i < 10; ++i)
+            s.enqueue(i);
+
+        s.outputIsEmpty();
+
+        System.out.println();
+
+        System.out.println("Content of Queue : " + s);
+        System.out.println("Queue Size : " + s.size());
+        System.out.println("The top element of the queue is : " + s.first());
+        System.out.println();
+
+        s.dequeue();
+        System.out.println("After deque, top element is now : " + s.first());
+        System.out.println("Content of Queue is now : " + s);
+
+        System.out.println("Now the queue has a size of : " + s.size());
+        System.out.println();
+
+        s.rotate();
+        System.out.println("Top of queue after rotation : " + s.first());
+        System.out.println("Size after rotation : " + s.size());
+        System.out.println("Content of Queue is now : " + s);
+
+    }
 }
