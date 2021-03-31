@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SinglyLinkedListTest {
 
@@ -51,13 +51,14 @@ class SinglyLinkedListTest {
 	}
 
 
-/*	@Test
+	@Test
 	void testRemoveLast() {
 		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
 		ll.addFirst(-1);
 		ll.addFirst(-2);
 		assertEquals(-1, ll.removeLast());
-	}*/
+		assertEquals(1, ll.size());
+	}
 
 	@Test
 	void testGet() {
@@ -67,6 +68,14 @@ class SinglyLinkedListTest {
 		assertEquals(1, ll.get(1));
 	}
 
+	@Test
+	void testRemoveFirst() {
+		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
+		for(int i = 0; i < 5; ++i) ll.addLast(i);
+
+		ll.removeFirst();
+		assertEquals("[1, 2, 3, 4]", ll.toString());
+	}
 	@Test
 	void testRemove() {
 		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
@@ -83,6 +92,36 @@ class SinglyLinkedListTest {
 
 		ll.add(2, -1);
 		assertEquals("[0, 1, -1, 2, 3, 4]", ll.toString());
+
+		try{
+			ll.add(-1, 5);
+			fail("cannot put element at a negative index");
+		} catch (IndexOutOfBoundsException ex){
+			// exception was caught
+		}
+	}
+
+	@Test
+	void testSet() {
+		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
+		for(int i = 0; i < 5; ++i) ll.addLast(i);
+
+		ll.set(2, 5);
+		assertEquals("[0, 1, 5, 3, 4]", ll.toString());
+
+		try{
+			ll.set(-1, 5);
+			fail();
+		} catch (IndexOutOfBoundsException ex){
+			// exception was caught
+		}
+
+		try{
+			ll.set(7, 5);
+			fail();
+		} catch (IndexOutOfBoundsException ex){
+			// exception was caught
+		}
 	}
 
 	@Test
@@ -91,6 +130,17 @@ class SinglyLinkedListTest {
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
 		assertEquals("[0, 1, 2, 3, 4]", ll.toString());
+	}
+
+	@Test
+	void testEquals() {
+		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
+		for(int i = 0; i < 5; ++i) ll.addLast(i);
+
+		SinglyLinkedList<Integer> ll2 = new SinglyLinkedList<>();
+		for(int i = 0; i < 5; ++i) ll2.addLast(i);
+
+		assertEquals(ll2, ll)  ;
 	}
 
 	@Test

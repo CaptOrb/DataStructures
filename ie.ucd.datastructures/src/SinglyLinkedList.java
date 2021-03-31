@@ -100,12 +100,12 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
             // transverse list until we reach i
             for (int j = 0; j < i - 1; j++) {
-                System.out.println("hi");
                 curr = curr.getNext();
             }
 
             temp.setNext(curr.getNext().getNext());
             curr.setNext(temp);
+
             // return the data in index i
             return curr.getNext().getData();
         }
@@ -113,6 +113,10 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
     @Override
     public void add(int i, E e) throws IndexOutOfBoundsException {
+
+        if(i < 0){
+            throw new IndexOutOfBoundsException("Cannot add an element to a negative index");
+        }
         if (size == 0 || i == 0) {
             addFirst(e);
         } else if (size == i) {
@@ -138,12 +142,32 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
         if (size == 0) {
             throw new IndexOutOfBoundsException();
         }
-
         if (size == 1) {
             removeFirst();
-        }
+        } else {
+            Node<E> curr = head;
 
-        size--;
+            // start at j = 1 because removing first element is handled above
+            for (int j = 1; j <= i; j++) {
+
+                // have we found the element we want to remove?
+                if (i == j) {
+
+                    // store the element to be deleted
+                    Node<E> temp = curr.getNext();
+
+                    // shift all subsequent elements in the list one position closer to the front.
+                    curr.setNext(curr.getNext().getNext());
+                    size--;
+                    // return the deleted element
+                    return temp.getData();
+                } else {
+                    // we have not found the element we wish to remove
+                    // so check if the next element in the SLL is the element we wish to remove
+                    curr = curr.getNext();
+                }
+            }
+        }
         return null;
     }
 
@@ -239,6 +263,33 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
         }
     }
 
+    /**
+     * Removes and returns the last element of the list.
+     *
+     * @return the removed element (or null if empty)
+     */
+    public E removeLast() {
+        if (isEmpty()) {
+            return null;
+        } else {
+
+            Node<E> last = head;
+
+            while (last.getNext() != null) {
+                last = last.getNext();
+            }
+
+            // the element to be returned
+            E answer = last.getData();
+
+            last.setData(null);
+
+            // decrement the size
+            size--;
+            return answer;
+        }
+    }
+
     public void reverse() {
 
         // Create a new array stack
@@ -271,11 +322,33 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
         }
     }
 
-
-    @SuppressWarnings({"unchecked"})
     public boolean equals(Object o) {
-        // TODO
-        return false;   // if we reach this, everything matched successfully
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        SinglyLinkedList other = (SinglyLinkedList) o;
+
+        // if the linked lists have different sizes
+        // they cannot possibly be equal
+        if (size != other.size)
+            return false;
+
+        Node currA = head;
+
+        Node currB = other.head;
+
+        while (currA != null) {
+
+            // go through every element in both linked lists
+            // if we find a value that is not the same in the relevant postition in both LL's
+            // we know they aren't equal
+            if (!currA.getData().equals(currB.getData()))
+                return false;
+
+            currA = currA.getNext();
+            currB = currB.getNext();
+        }
+        return true;
     }
 
     @SuppressWarnings({"unchecked"})
@@ -294,11 +367,19 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
      * Produces a string representation of the contents of the list.
      * This exists for debugging purposes only.
      */
+    @Override
     public String toString() {
+        Node<E> curr = head;
+
         StringBuilder s = new StringBuilder();
         s.append("[");
-        for (E item : this) {
-            s.append(item).append(", ");
+
+        while (curr != null) {
+            s.append(curr.getData());
+            if (curr.getNext() != null) {
+                s.append(", ");
+            }
+            curr = curr.getNext();
         }
         s.append("]");
         return s.toString();
@@ -333,7 +414,7 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
 
         for (String s : alphabet) {
             sll.addFirst(s);
-            //sll.addLast(s);
+            sll.addLast(s);
         }
         System.out.println(sll.toString());
 

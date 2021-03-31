@@ -205,7 +205,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return current.getData() != null;
         }
 
         @Override
@@ -322,11 +322,19 @@ public class DoublyLinkedList<E> implements List<E> {
      * This exists for debugging purposes only.
      */
     public String toString() {
+        Node<E> curr = header.getNext();
+
         StringBuilder s = new StringBuilder();
-        for (E item : this) {
-            //if(item!=null)
-            s.append(item).append(" ");
+        s.append("[");
+
+        while (curr.getData() != null) {
+            s.append(curr.getData());
+            if (curr.getNext().getData() != null) {
+                s.append(", ");
+            }
+            curr = curr.getNext();
         }
+        s.append("]");
         return s.toString();
     }
 
