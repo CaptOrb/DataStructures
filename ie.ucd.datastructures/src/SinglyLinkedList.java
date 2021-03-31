@@ -78,12 +78,30 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
         Node<E> curr = head;
 
         // transverse list until we reach i
-        for (int j = 0; j < i ; j++) {
+        for (int j = 0; j < i; j++) {
             curr = curr.getNext();
         }
 
         // return the data in index i
         return curr.getData();
+
+    }
+
+    public Node<E> getNode(int i) throws IndexOutOfBoundsException {
+
+        if (head == null) {
+            return null;
+        }
+
+        Node<E> curr = head;
+
+        // transverse list until we reach i
+        for (int j = 0; j < i; j++) {
+            curr = curr.getNext();
+        }
+
+        // return the data in index i
+        return curr;
 
     }
 
@@ -95,26 +113,21 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         } else {
 
-            Node<E> temp = new Node<E>(e, head);
-            Node<E> curr = head;
+            Node<E> oldNode = getNode(i);
 
-            // transverse list until we reach i
-            for (int j = 0; j < i - 1; j++) {
-                curr = curr.getNext();
-            }
+            E ret = oldNode.getData();
 
-            temp.setNext(curr.getNext().getNext());
-            curr.setNext(temp);
+            oldNode.setData(e);
 
             // return the data in index i
-            return curr.getNext().getData();
+            return ret;
         }
     }
 
     @Override
     public void add(int i, E e) throws IndexOutOfBoundsException {
 
-        if(i < 0){
+        if (i < 0) {
             throw new IndexOutOfBoundsException("Cannot add an element to a negative index");
         }
         if (size == 0 || i == 0) {
@@ -416,6 +429,10 @@ public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
             sll.addFirst(s);
             sll.addLast(s);
         }
+
+        String p = sll.set(2, "P");
+
+        System.out.println(p);
         System.out.println(sll.toString());
 
         for (String s : sll) {

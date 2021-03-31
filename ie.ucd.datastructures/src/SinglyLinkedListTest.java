@@ -106,7 +106,9 @@ class SinglyLinkedListTest {
 		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
+		//0, 1, 2,3, 4
 		ll.set(2, 5);
+		assertEquals(2,ll.set(2, 5));
 		assertEquals("[0, 1, 5, 3, 4]", ll.toString());
 
 		try{

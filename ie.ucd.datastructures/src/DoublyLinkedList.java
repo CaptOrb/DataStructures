@@ -24,6 +24,10 @@ public class DoublyLinkedList<E> implements List<E> {
             return data;
         }
 
+        public void setData(E data) {
+            this.data = data;
+        }
+
         public Node<E> getNext() {
             return next;
         }
@@ -45,12 +49,12 @@ public class DoublyLinkedList<E> implements List<E> {
     /**
      * Sentinel node at the beginning of the list
      */
-    private Node<E> header;                    // header sentinel
+    private final Node<E> header;                    // header sentinel
 
     /**
      * Sentinel node at the end of the list
      */
-    private Node<E> trailer;                   // trailer sentinel
+    private final Node<E> trailer;                   // trailer sentinel
 
     /**
      * Number of elements in the list (not including sentinels)
@@ -91,17 +95,29 @@ public class DoublyLinkedList<E> implements List<E> {
         if (i < 0 || i > size - 1) {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         } else {
-
-            Node<E> curr = header;
-
-            // transverse list until we reach i
-            for (int j = 0; j <= i; j++) {
-                curr = curr.getNext();
-            }
+            Node<E> curr = getNode(i);
 
             // return the data in index i
             return curr.getData();
         }
+    }
+
+
+    public Node<E> getNode(int i) throws IndexOutOfBoundsException {
+
+        if (header == null) {
+            return null;
+        }
+
+        Node<E> curr = header;
+
+        // transverse list until we reach i
+        for (int j = 0; j <= i; j++) {
+            curr = curr.getNext();
+        }
+
+        return curr;
+
     }
 
     @Override
@@ -110,26 +126,16 @@ public class DoublyLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         } else {
 
-            Node<E> newNode = new Node<>(e, null, null);
-            Node<E> curr = header.getNext();
+            Node<E> oldNode = getNode(i);
 
-            // transverse list until we reach i
-            for (int j = 0; j < i; j++) {
-                curr = curr.getNext();
-            }
-            Node<E> prev = curr.getPrev();
-            Node<E> next = curr.getNext();
+            E ret = oldNode.getData();
 
-            // next to the prev node is the node we are inserting
-            prev.setNext(newNode);
+            System.out.println(ret);
 
-            // after the new node is the node that used to be at index i
-            newNode.setNext(next);
+            // replace data in old node
+            oldNode.setData(e);
 
-            // the node before the new one
-            newNode.setPrev(prev);
-
-            return curr.getData();
+            return ret;
         }
     }
 
@@ -142,11 +148,8 @@ public class DoublyLinkedList<E> implements List<E> {
         } else {
 
             Node<E> newNode = new Node<E>(e, null, null);
-            Node<E> curr = header.getNext();
 
-            for (int j = 0; j < i; j++) {
-                curr = curr.next;
-            }
+            Node<E> curr = getNode(i);
             Node<E> prevNode = curr.getPrev();
 
             // next to the prev node is the node we are inserting
@@ -159,7 +162,6 @@ public class DoublyLinkedList<E> implements List<E> {
             newNode.setPrev(prevNode);
         }
         size++;
-
     }
 
     @Override
@@ -177,12 +179,10 @@ public class DoublyLinkedList<E> implements List<E> {
             size--;
         } else {
 
-            Node<E> curr = header;
+            Node<E> curr = getNode(i);
 
-            // iterate through the linked list to find node at index i
-            for (int j = 0; j <= i; j++) {
-                curr = curr.next;
-            }
+            E removed = curr.getData();
+
             // We need to find the node before and after the node we are removing
             Node<E> previous = curr.getPrev();
             Node<E> next = curr.getNext();
@@ -194,7 +194,7 @@ public class DoublyLinkedList<E> implements List<E> {
             next.setPrev(previous);
 
             size--;
-            return curr.getData();
+            return removed;
         }
         return null;
     }
@@ -210,14 +210,14 @@ public class DoublyLinkedList<E> implements List<E> {
 
         @Override
         public E next() {
-            E data = (E) current.getData();
+            E data = current.getData();
             current = current.next;
             return data;
         }
     }
 
     public Iterator<E> iterator() {
-        return new DoublyLinkedListIterator<E>();
+        return new DoublyLinkedListIterator<>();
     }
 
     /**
@@ -340,7 +340,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
     public static void main(String[] args) {
 
-        DoublyLinkedList<String> ll = new DoublyLinkedList<String>();
+        DoublyLinkedList<String> ll = new DoublyLinkedList<>();
 
         String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 

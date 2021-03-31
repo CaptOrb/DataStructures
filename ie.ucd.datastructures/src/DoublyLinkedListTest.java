@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class DoublyLinkedListTest {
 
@@ -103,6 +104,31 @@ class DoublyLinkedListTest {
 			buf.add(i);
 		}
 		assertEquals("[0, 1, 2, 3, 4]", buf.toString());
+	}
+
+	@Test
+	void testSet() {
+		DoublyLinkedList<Integer> ll = new DoublyLinkedList<>();
+		for(int i = 0; i < 5; ++i) ll.addLast(i);
+
+		//0, 1, 2,3, 4
+
+		assertEquals(2, ll.set(2, 5));
+		assertEquals("[0, 1, 5, 3, 4]", ll.toString());
+
+		try{
+			ll.set(-1, 5);
+			fail();
+		} catch (IndexOutOfBoundsException ex){
+			// exception was caught
+		}
+
+		try{
+			ll.set(7, 5);
+			fail();
+		} catch (IndexOutOfBoundsException ex){
+			// exception was caught
+		}
 	}
 
 }
