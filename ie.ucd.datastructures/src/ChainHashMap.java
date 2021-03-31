@@ -32,7 +32,7 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
     }
 
     public void resize(int newCapacity){
-         // make empt array
+         // make empty array
         UnsortedTableMap<K,V> [] newTable = new UnsortedTableMap[newCapacity];
 
         for(int i =0; i < capacity; ++i){
@@ -42,13 +42,11 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
 
         //    newTable[newHash] = bucket;
         }
-
     }
 
     public static void main(String[] args) {
         //HashMap<Integer, String> m = new HashMap<Integer, String>();
         ChainHashMap<Integer, String> m = new ChainHashMap<Integer, String>();
-
 
         System.out.println(m.hashValue(1) + m.hashValue(10));
 
@@ -60,12 +58,10 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
         Random rnd = new Random();
         int n = 17 * 10;
 
-
         System.out.println("m: " + m);
 
         m.remove(11);
         System.out.println("m: " + m);
-
 
         for(int i = 0 ; i < n; ++i){
             m.put(i, "test");
@@ -136,8 +132,18 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
      */
     @Override
     protected V bucketRemove(int h, K k) {
-        // TODO
-        return  null;
+        UnsortedTableMap<K, V> bucket = table[h];
+
+        if (bucket == null) {
+            return null;
+        }
+
+        int oldSize = bucket.size();
+        V removed = bucket.remove(k);
+
+        n -= (oldSize - bucket.size());
+
+        return removed;
     }
 
     /**
@@ -147,18 +153,25 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
      */
     @Override
     public Iterable<Entry<K, V>> entrySet() {
-		/*
+
+        /*
 		for each element in (UnsortedTableMap []) table
 			for each element in bucket:
 				print element
 		*/
-        // TODO
-        return null;
+        ArrayList<Entry<K,V>> buffer = new ArrayList<>();
+
+        for(int i = 0; i< capacity; i++){
+            if(table[i] != null) {
+                for (Entry<K, V> k : table[i].entrySet()) {
+                    buffer.add(k);
+                }
+            }
+        }
+        return buffer;
     }
 
     public String toString() {
-       // return entrySet().toString();
-
-        return Arrays.toString(table);
+        return entrySet().toString();
     }
 }
