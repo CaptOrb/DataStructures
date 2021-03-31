@@ -8,7 +8,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     public ArrayStack(int capacity) {
-        data = (E[]) new Object[CAPACITY];
+        data = (E[]) new Object[capacity];
     }
 
     @Override
@@ -50,6 +50,22 @@ public class ArrayStack<E> implements Stack<E> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("[");
+        for (int i = data.length - 1; i >= 0 ; i--) {
+
+            if(data[i] != null)
+            s.append(data[i]).append(", ");
+        }
+        if (s.length() > 2)
+            s.delete(s.length() - 2 , s.length());
+        s.append("]");
+        return s.toString();
+    }
+
     public static void main(String[] args) {
 
         ArrayStack<String> sll = new ArrayStack<>();
@@ -64,6 +80,11 @@ public class ArrayStack<E> implements Stack<E> {
         sll.pop();
 
         System.out.println(sll.top());
+
+        ArrayStack<Integer> s = new ArrayStack<>();
+        for (int i = 0; i < 10; ++i)
+            s.push(i);
+        System.out.println(s.toString());
 
         sll.printStack();
 

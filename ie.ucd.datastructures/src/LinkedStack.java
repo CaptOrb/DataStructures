@@ -29,6 +29,20 @@ public class LinkedStack<E> implements Stack<E> {
 		return list.removeFirst();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+
+		s.append("[");
+		for (E p : list) {
+			s.append(p).append(", ");
+		}
+		if (s.length() > 2)
+			s.delete(s.length() - 2 , s.length());
+		s.append("]");
+		return s.toString();
+	}
+
 	public static void main(String[] args) {
 
 		LinkedStack<String> sll = new LinkedStack<>();
@@ -38,6 +52,8 @@ public class LinkedStack<E> implements Stack<E> {
 		for (String s : alphabet) {
 			sll.push(s);
 		}
+
+		System.out.println(sll);
 
 		System.out.println(sll.top());
 		sll.pop();

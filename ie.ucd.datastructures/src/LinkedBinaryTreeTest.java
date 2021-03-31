@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class LinkedBinaryTreeTest {
 
@@ -55,6 +56,19 @@ class LinkedBinaryTreeTest {
         Integer old = bt.remove(bt.right(bt.root()));
         assertEquals(old, 1);
         assertEquals(1, bt.size());
+
+        try{
+            LinkedBinaryTree<Integer> another = new LinkedBinaryTree<Integer>();
+
+            Integer anInt = Integer.parseInt("0");
+            another.addRoot(anInt);
+
+            another.addLeft(bt.root(), 1);
+            another.addRight(bt.root(), 1);
+
+            fail("Should have thrown exception");
+
+        }catch (IllegalArgumentException ignored){}
     }
 
     @Test

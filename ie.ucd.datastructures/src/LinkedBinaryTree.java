@@ -289,25 +289,38 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p has two children.
      */
     public E remove(Position<E> p) throws IllegalArgumentException {
-        // TODO
+        Node<E> node = validate(p);
 
-        size--;
-        return null;
-    }
-
-    public String toString() {
-        // you can use either the StringBuilder or ArrayList...
-        StringBuilder sb = new StringBuilder();
-        ArrayList<E> buf = new ArrayList<>();
-        //sb.append("[");
-        for (Position<E> p : positions()) {
-            //sb.append(p.getElement());
-            //sb.append(", ");
-            buf.add(p.getElement());
+        if (numChildren(p) == 2) {
+            throw new IllegalArgumentException("P cannot have two children");
         }
-        //sb.append("]");
-        //return sb.toString();
-        return buf.toString();
+
+        Node<E> child;
+
+        if (node.getLeft() != null) {
+            child = node.getLeft();
+        } else {
+            child = node.getRight();
+        }
+
+        if (child != null) {
+            child.setParent(node.getParent());// child’s grandparent becomes its parent
+            if (node == root) {
+                root = child;
+            } else {
+                Node<E> parent = node.getParent();
+
+                if (node == parent.getLeft())
+                    parent.setLeft(child);
+                else
+                    parent.setRight(child);
+            }
+        }
+        size--;
+
+        node.setParent(node);
+
+        return node.getElement();
     }
 
     public void createLevelOrder(ArrayList<E> l) {
@@ -349,6 +362,21 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public String toBinaryTreeString() {
         BinaryTreePrinter<E> btp = new BinaryTreePrinter<>(this);
         return btp.print();
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("[");
+        for (E item : this) {
+            s.append(item).append(", ");
+        }
+
+        if (s.length() > 2)
+            s.delete(s.length() - 2 , s.length());
+
+        s.append("]");
+        return s.toString();
     }
 
 
@@ -401,37 +429,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             this.parent = parent;
         }
 
+        @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-            sb.append("[");
-            sb.append(element);
-            sb.append(", ");
-
-            if (parent != null) {
-                sb.append(parent.element);
-            } else
-                sb.append(" null");
-
-            sb.append(",");
-
-            if (left != null) {
-                sb.append(left.element);
-            } else
-                sb.append(" null");
-
-            sb.append(", ");
-
-            if (right != null) {
-                sb.append(right.element);
-            } else {
-                sb.append(" null");
-            }
-            sb.append("]");
-
-            return sb.toString();
+            return element.toString();
         }
     }
+
 
     public static void main(String[] args) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
@@ -496,6 +499,5 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println();
 
         System.out.println(bt.toBinaryTreeString());
-
     }
 }

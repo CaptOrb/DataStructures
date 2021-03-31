@@ -30,6 +30,20 @@ public class LinkedQueue<E> implements Queue<E> {
         return list.removeFirst();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("[");
+        for (E p : list) {
+            s.append(p).append(", ");
+        }
+        if (s.length() > 2)
+            s.delete(s.length() - 2 , s.length());
+        s.append("]");
+        return s.toString();
+    }
+
     public static void main(String[] args) {
         ArrayQueue<Integer> ex = new ArrayQueue<Integer>(1000);
 
