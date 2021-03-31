@@ -18,12 +18,47 @@ class LinkedBinaryTreeTest {
     }
 
     @Test
+    void testAddRecursive() {
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        bt.insert(25);
+        bt.insert(31);
+        bt.insert(58);
+        bt.insert(36);
+        bt.insert(42);
+        bt.insert(90);
+        bt.insert(62);
+        bt.insert(75);
+
+        bt.breadthfirst();
+        System.out.println(bt.toBinaryTreeString());
+        assertEquals(8, bt.size());
+        assertEquals("[25, 31, 58, 36, 90, 42, 62, 75]", bt.breadthfirst().toString());
+
+    }
+
+    @Test
     void testAddRoot() {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
 
         Integer c = Integer.parseInt("0");
         bt.addRoot(c);
         assertEquals(c, bt.root().getElement(), "root not added correctly");
+    }
+
+    @Test
+    void testParent(){
+
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        Position<Integer> root = bt.addRoot(12);
+
+        Position<Integer> p1 = bt.addLeft(root, 25);
+        assertEquals(bt.parent(p1), root);
+
+        Position<Integer> p2 = bt.addRight(p1, 30);
+        assertEquals(bt.parent(p2), p1);
+
     }
 
     @Test
@@ -34,6 +69,12 @@ class LinkedBinaryTreeTest {
         bt.addRoot(c);
         bt.addLeft(bt.root(), 1);
         assertEquals(1, bt.left(bt.root()).getElement());
+
+        try {
+            bt.addLeft(bt.root(), 1);
+
+            fail("Already has left child - > should of thrown exception");
+        } catch (IllegalArgumentException ex){}
     }
 
     @Test
@@ -44,6 +85,12 @@ class LinkedBinaryTreeTest {
         bt.addRoot(c);
         bt.addRight(bt.root(), 1);
         assertEquals(1, bt.right(bt.root()).getElement());
+
+        try {
+            bt.addRight(bt.root(), 1);
+
+            fail("Already has right child - > should of thrown exception");
+        } catch (IllegalArgumentException ex){}
     }
 
     @Test
@@ -57,7 +104,7 @@ class LinkedBinaryTreeTest {
         assertEquals(old, 1);
         assertEquals(1, bt.size());
 
-        try{
+        try {
             LinkedBinaryTree<Integer> another = new LinkedBinaryTree<Integer>();
 
             Integer anInt = Integer.parseInt("0");
@@ -68,7 +115,8 @@ class LinkedBinaryTreeTest {
 
             fail("Should have thrown exception");
 
-        }catch (IllegalArgumentException ignored){}
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     @Test
@@ -119,6 +167,71 @@ class LinkedBinaryTreeTest {
         bt.createLevelOrder(arr);
 
         assertEquals(3, bt.height(bt.root()));
+    }
+
+    @Test
+    void set() {
+
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        Position<Integer> root = bt.addRoot(12);
+
+        Position<Integer> p1 = bt.addLeft(root, 25);
+
+        Position<Integer> p2 = bt.addRight(root, 31);
+
+        bt.set(p1, 1);
+
+        bt.breadthfirst();
+
+        assertEquals("[12, 1, 31]", bt.breadthfirst().toString());
+
+        try {
+            Position<Integer> p3 = null;
+
+            bt.set(p3, 1);
+
+            fail("NOT A VALID POSITION, TEST SHOULD OF FAILED");
+        } catch (IllegalArgumentException ex){}
+
+    }
+
+    @Test
+    void testValidate() {
+
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        Position<Integer> root = bt.addRoot(12);
+
+        Position<Integer> p1 = null;
+
+        Position<Integer> p2 = bt.addRight(root, 44);
+
+        try {
+            bt.validate(p1);
+
+            fail("Should of thrown exception");
+        } catch (IllegalArgumentException ex){}
+
+        assertEquals(bt.validate(p2), p2);
+
+
+    }
+
+    @Test
+    void testLeafCount(){
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        Position<Integer> root = bt.addRoot(12);
+
+        Position<Integer> p1 = bt.addLeft(root, 3);
+
+        Position<Integer> p2 = bt.addRight(root, 44);
+
+        Position<Integer> p3 = bt.addRight(p1, 5);
+
+        assertEquals(bt.getLeafCount(), 2);
+
     }
 
 }

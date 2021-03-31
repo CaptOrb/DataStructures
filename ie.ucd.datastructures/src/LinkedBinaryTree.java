@@ -258,12 +258,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
     }
 
-    private void insert(E e) {
+    public void insert(E e) {
         root = addRecursive(root, e);
         ++size;
     }
 
-    private Node<E> addRecursive(Node<E> p, E e) {
+    public Node<E> addRecursive(Node<E> p, E e) {
 
         if (p == null) {
             return createNode(e, null, null, null);
@@ -329,7 +329,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     private Node<E> createLevelOrderHelper(ArrayList<E> l, Node<E> p, int i) {
 
-        if(i < l.size()) {
+        if (i < l.size()) {
             Node<E> n = createNode(l.get(i), p, null, null);
 
             n.left = createLevelOrderHelper(l, n.left, 2 * i + 1);
@@ -346,7 +346,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     private Node<E> createLevelOrderHelper(E[] a, Node<E> p, int i) {
 
-        if(i < a.length) {
+        if (i < a.length) {
             Node<E> n = createNode(a[i], p, null, null);
 
             n.left = createLevelOrderHelper(a, n.left, 2 * i + 1);
@@ -373,7 +373,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
 
         if (s.length() > 2)
-            s.delete(s.length() - 2 , s.length());
+            s.delete(s.length() - 2, s.length());
 
         s.append("]");
         return s.toString();
@@ -450,7 +450,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         bt.insert(90);
         bt.insert(62);
         bt.insert(75);
-
 
         System.out.println("root " + root);
 
