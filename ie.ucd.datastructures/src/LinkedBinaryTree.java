@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * Concrete implementation of a binary tree using a node-based, linked
  * structure.
@@ -453,6 +455,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         System.out.println("root " + root);
 
+        // Can you write a level order constructor?
+        // Level order construction
+        Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
+        bt.createLevelOrder(arr);
+
+        System.out.println("bt inorder: " + bt.size() + " " + bt.inorder());
+        System.out.println("bt preorder: " + bt.size() + " " + bt.preorder());
+        System.out.println("bt postorder: " + bt.size() + " " + bt.postorder());
+
+        System.out.println("bt height: " + bt.height(bt.root()));
+
+        System.out.println(bt.getLeafCount() + " external nodes");
+
+        System.out.println(bt.toString());
+
+        System.out.println();
+
+        System.out.println(bt.toBinaryTreeString());
+
+
         /*Position<Integer> p1 = bt.addLeft(root, 25);
 
         System.out.println("p1: " + p1);
@@ -478,25 +500,5 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         //  System.out.println("ext node count " + bt.left(bt.root()).getElement());
 
         // System.out.println(bt.toString());
-
-        // Can you write a level order constructor?
-        // Level order construction
-        Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
-        bt.createLevelOrder(arr);
-
-        System.out.println("bt inorder: " + bt.size() + " " + bt.inorder());
-        System.out.println("bt preorder: " + bt.size() + " " + bt.preorder());
-        System.out.println("bt postorder: " + bt.size() + " " + bt.postorder());
-
-        System.out.println("bt height: " + bt.height(bt.root()));
-        System.out.println("bt depth: " + bt.depth(bt.root()));
-
-        System.out.println(bt.getLeafCount() + " external nodes");
-
-        System.out.println(bt.toString());
-
-        System.out.println();
-
-        System.out.println(bt.toBinaryTreeString());
     }
 }

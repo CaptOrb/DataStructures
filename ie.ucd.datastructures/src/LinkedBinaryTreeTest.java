@@ -19,7 +19,7 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testAddRecursive() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         bt.insert(25);
         bt.insert(31);
@@ -34,12 +34,11 @@ class LinkedBinaryTreeTest {
         System.out.println(bt.toBinaryTreeString());
         assertEquals(8, bt.size());
         assertEquals("[25, 31, 58, 36, 90, 42, 62, 75]", bt.breadthfirst().toString());
-
     }
 
     @Test
     void testAddRoot() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer c = Integer.parseInt("0");
         bt.addRoot(c);
@@ -49,7 +48,7 @@ class LinkedBinaryTreeTest {
     @Test
     void testParent(){
 
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Position<Integer> root = bt.addRoot(12);
 
@@ -58,12 +57,11 @@ class LinkedBinaryTreeTest {
 
         Position<Integer> p2 = bt.addRight(p1, 30);
         assertEquals(bt.parent(p2), p1);
-
     }
 
     @Test
     void testAddLeft() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer c = Integer.parseInt("0");
         bt.addRoot(c);
@@ -79,7 +77,7 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testAddRight() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer c = Integer.parseInt("0");
         bt.addRoot(c);
@@ -95,7 +93,7 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testRemove() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer c = Integer.parseInt("0");
         bt.addRoot(c);
@@ -105,7 +103,7 @@ class LinkedBinaryTreeTest {
         assertEquals(1, bt.size());
 
         try {
-            LinkedBinaryTree<Integer> another = new LinkedBinaryTree<Integer>();
+            LinkedBinaryTree<Integer> another = new LinkedBinaryTree<>();
 
             Integer anInt = Integer.parseInt("0");
             another.addRoot(anInt);
@@ -115,13 +113,12 @@ class LinkedBinaryTreeTest {
 
             fail("Should have thrown exception");
 
-        } catch (IllegalArgumentException ignored) {
-        }
+        } catch (IllegalArgumentException ignored) {}
     }
 
     @Test
     void testToString() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer[] arr = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         bt.createLevelOrder(arr);
@@ -131,7 +128,7 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testCreateLevelOrder() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer[] arr = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         bt.createLevelOrder(arr);
@@ -141,7 +138,7 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testInorder() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer[] arr = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         bt.createLevelOrder(arr);
@@ -151,17 +148,27 @@ class LinkedBinaryTreeTest {
 
     @Test
     void testDepth() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer[] arr = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         bt.createLevelOrder(arr);
 
         assertEquals(0, bt.depth(bt.root()));
+
+        LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
+
+        Position<Integer> root2 = bt2.addRoot(12);
+
+        Position<Integer> p1 = bt2.addLeft(root2, 25);
+
+        Position<Integer> p2 = bt2.addLeft(p1, 80);
+
+        assertEquals(2, bt2.depth(p2));
     }
 
     @Test
     void testHeight() {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
 
         Integer[] arr = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         bt.createLevelOrder(arr);
@@ -214,8 +221,6 @@ class LinkedBinaryTreeTest {
         } catch (IllegalArgumentException ex){}
 
         assertEquals(bt.validate(p2), p2);
-
-
     }
 
     @Test
@@ -231,7 +236,5 @@ class LinkedBinaryTreeTest {
         Position<Integer> p3 = bt.addRight(p1, 5);
 
         assertEquals(bt.getLeafCount(), 2);
-
     }
-
 }

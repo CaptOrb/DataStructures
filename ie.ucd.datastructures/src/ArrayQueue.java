@@ -55,7 +55,7 @@ public class ArrayQueue<E> implements Queue<E> {
 		// use modular arithmetic to get the index of the new first element in the queue
 		front = (front + 1) % data.length;
 
-		// decrement the number of elements in thr queue
+		// decrement the number of elements in the queue
 		numElements--;
 
 		// Return the element that was removed from the queue
@@ -91,6 +91,4 @@ public class ArrayQueue<E> implements Queue<E> {
 		System.out.println("At the first is " + ex.first());
 
     }
-
-
 }
