@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TreeMapTest {
 
@@ -35,7 +36,7 @@ class TreeMapTest {
         }
         assertEquals("15", map.get(15));
         assertEquals("24", map.get(24));
-        assertEquals(null, map.get(-1));
+        assertNull(map.get(-1));
 
     }
 

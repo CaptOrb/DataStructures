@@ -370,8 +370,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         StringBuilder s = new StringBuilder();
 
         s.append("[");
-        for (E item : this) {
-            s.append(item).append(", ");
+        for (Position<E> position : positions()) {
+            s.append(position.getElement()).append(", ");
         }
 
         if (s.length() > 2)
@@ -433,7 +433,16 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         @Override
         public String toString() {
-            return element.toString();
+            StringBuilder sb = new StringBuilder();
+
+           // sb.append("[");
+            sb.append(element);
+
+            //sb.append("]");
+
+            return sb.toString();
+
+
         }
     }
 

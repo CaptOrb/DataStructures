@@ -578,14 +578,13 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
         TreeMap<Integer, Integer> treeMap = new TreeMap<Integer, Integer>();
 
-        int n = 80;
+        int n = 10;
         int max_n = 100;
 
         rnd.ints(1, max_n).limit(n).distinct().boxed().forEach(x -> treeMap.put(x, x));
 
 
-     //  treeMap.tree.inorder();
-        //System.out.println(treeMap.tree.inorder());
+        System.out.println(treeMap.tree.inorder());
 
         System.out.println(treeMap.toBinaryTreeString());
 
