@@ -17,11 +17,11 @@ class SinglyLinkedListTest {
 	@Test
 	void testIsEmpty() {
 		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
-		assertEquals(true, ll.isEmpty());
+		assertTrue(ll.isEmpty());
 		ll.addFirst(0);
-		assertEquals(false, ll.isEmpty());
+		assertFalse(ll.isEmpty());
 		ll.removeFirst();
-		assertEquals(true, ll.isEmpty());
+		assertTrue(ll.isEmpty());
 	}
 
 	@Test
@@ -31,7 +31,7 @@ class SinglyLinkedListTest {
 		assertEquals(-1, ll.first());
 		
 		ll.removeFirst();
-		assertEquals(null, ll.first());
+		assertNull(ll.first());
 		
 		
 	}
@@ -106,8 +106,6 @@ class SinglyLinkedListTest {
 		SinglyLinkedList<Integer> ll = new SinglyLinkedList<>();
 		for(int i = 0; i < 5; ++i) ll.addLast(i);
 
-		//0, 1, 2,3, 4
-		ll.set(2, 5);
 		assertEquals(2,ll.set(2, 5));
 		assertEquals("[0, 1, 5, 3, 4]", ll.toString());
 

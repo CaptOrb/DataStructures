@@ -142,7 +142,7 @@ public class CircularlyLinkedList<E> implements List<E> {
 
             Node<E> prev = tail;
 
-            for (int j = 0; j <= i; j++) {
+            for (int j = 0; j < i; j++) {
                 prev = prev.next;
             }
             // in old index i - replace with new val
@@ -303,19 +303,28 @@ public class CircularlyLinkedList<E> implements List<E> {
             ll.addLast(s);
         }
 
-        System.out.println(ll.first());
+        System.out.println("LL initially contains\n" + ll.toString());
+
+        ll.add(2, "hiii");
+
+        System.out.println("\nAfter adding element at index 2 , LL contains\n" + ll.toString());
+
+        System.out.println("\nThe first element in the CLL is: " + ll.first());
 
         System.out.println(ll.toString());
 
-        System.out.println("Removed: " + ll.removeFirst());
+        System.out.println("\nRemoved: " + ll.removeFirst());
 
         System.out.println(ll.toString() + "\n\n");
 
         ll.rotate();
         ll.rotate();
 
+        System.out.println("After rotating twice LL contains:\n");
         for (String s : ll) {
             System.out.print(s + ", ");
         }
+        System.out.println(ll.toString());
+
     }
 }

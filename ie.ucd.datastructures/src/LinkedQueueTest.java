@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinkedQueueTest {
 
@@ -19,7 +20,8 @@ class LinkedQueueTest {
 			s.enqueue(i);
 		for(int i = 0; i < 10; ++i)
 			s.dequeue();
-		assertEquals(true, s.isEmpty());
+
+		assertTrue(s.isEmpty());
 	}
 
 	@Test

@@ -441,9 +441,57 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             //sb.append("]");
 
             return sb.toString();
-
-
         }
+    }
+
+    public boolean isSymmetric(Node<E> nodeA, Node<E> nodeB) {
+
+        if (nodeA == null && nodeB == null) {
+            return true;
+        }
+
+        if (nodeA != null && nodeB != null) {
+
+            return isSymmetric(nodeA.getLeft(), nodeB.getRight()) && isSymmetric(nodeA.getRight(), nodeB.getLeft());
+        }
+        return false;
+    }
+
+    public boolean isSymmetric(Node<E> root) {
+        return isSymmetric(root.getLeft(), root.getRight());
+    }
+
+    public boolean isTreeSymmetric() {
+        return isSymmetric(root);
+    }
+
+   public Node<E> mirror() {
+        return mirrorHelper(root);
+    }
+
+    public Node<E> mirrorHelper(Node<E> nodeA) {
+
+        if(nodeA == null){
+            return null;
+        }
+
+        Node<E> temp = nodeA.getLeft();
+
+        nodeA.setLeft(nodeA.getRight());
+
+        nodeA.setRight(temp);
+
+        mirrorHelper(nodeA.getLeft());
+        mirrorHelper(nodeA.getRight());
+
+        return nodeA;
+    }
+
+    public int dist(Node<E> nodeA, Node<E> nodeB){
+        if(nodeA == null || nodeB == null){
+            return 0;
+        }
+        else return (1 + dist(nodeA.getLeft(), nodeA.getRight()) + dist(nodeB.getLeft(), nodeB.getRight()));
     }
 
 
@@ -466,7 +514,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         // Can you write a level order constructor?
         // Level order construction
-        Integer[] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
+        Integer[] arr = {12, 25, 31, 58, 36, 42, 90};
         bt.createLevelOrder(arr);
 
         System.out.println("bt inorder: " + bt.size() + " " + bt.inorder());
@@ -482,6 +530,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println();
 
         System.out.println(bt.toBinaryTreeString());
+
+        System.out.println(bt.isTreeSymmetric());
+
+        Node i = bt.mirror();
+
+        System.out.println(i);
+
+        System.out.println(bt.toBinaryTreeString());
+
+        System.out.println("j " + bt.left(bt.root));
+
+        System.out.println(bt.dist(bt.root, (Node<Integer>) bt.left(bt.root)));
 
 
         /*Position<Integer> p1 = bt.addLeft(root, 25);
