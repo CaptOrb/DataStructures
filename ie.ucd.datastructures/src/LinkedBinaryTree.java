@@ -293,9 +293,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public E remove(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
 
-/*        if (numChildren(p) == 2) {
+        if (numChildren(p) == 2) {
             throw new IllegalArgumentException("P cannot have two children");
-        }*/
+        }
 
         Node<E> child;
 
@@ -307,22 +307,29 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         if (child != null) {
             child.setParent(node.getParent());// child’s grandparent becomes its parent
-            if (node == root) {
-                root = child;
-            } else {
-                Node<E> parent = node.getParent();
+        }
+        if (node == root) {
+            root = child;
+        } else {
+            Node<E> parent = node.getParent();
 
-                if (node == parent.getLeft())
-                    parent.setLeft(child);
-                else
-                    parent.setRight(child);
+            if (node == parent.getLeft()) {
+                parent.setLeft(child);
+            } else {
+                parent.setRight(child);
             }
         }
+
         size--;
 
+        //removing node from memory
+        E temp = node.getElement();
+        node.setElement(null);
+        node.setLeft(null);
+        node.setRight(null);
         node.setParent(node);
 
-        return node.getElement();
+        return temp;
     }
 
     public void createLevelOrder(ArrayList<E> l) {

@@ -8,6 +8,8 @@ import java.util.*;
 
 public class AVLTreeMap<K, V> extends TreeMap<K, V> {
 
+     protected BalanceableBinaryTree<K, V> tree = new BalanceableBinaryTree<>();
+
     /**
      * Constructs an empty map using the natural ordering of keys.
      */
@@ -43,13 +45,14 @@ public class AVLTreeMap<K, V> extends TreeMap<K, V> {
         //Collections.shuffle(intList);
         intList.forEach(x -> avl.put(x, x));
 
+        System.out.println("avl: " + avl);
 
         System.out.println(avl.toBinaryTreeString());
 
         //avl.remove(5);
         avl.put(12, 12);
         //avl.put(8,8);
-        avl.remove(53);
+       // avl.remove(53);
         System.out.println(avl.toBinaryTreeString());
 
 
@@ -162,7 +165,7 @@ public class AVLTreeMap<K, V> extends TreeMap<K, V> {
     }
 
     public String toBinaryTreeString() {
-        BinaryTreePrinter<Entry<K, V>> btp = new BinaryTreePrinter<>(this.tree);
+        BinaryTreePrinter<Entry<K, V>> btp = new BinaryTreePrinter<>(tree);
         return btp.print();
 
     }
