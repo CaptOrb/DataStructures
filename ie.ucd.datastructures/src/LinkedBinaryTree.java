@@ -293,9 +293,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public E remove(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
 
-        if (numChildren(p) == 2) {
+/*        if (numChildren(p) == 2) {
             throw new IllegalArgumentException("P cannot have two children");
-        }
+        }*/
 
         Node<E> child;
 
@@ -433,14 +433,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-           // sb.append("[");
-            sb.append(element);
-
-            //sb.append("]");
-
-            return sb.toString();
+            return String.valueOf(element);
         }
     }
 
@@ -533,7 +526,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         System.out.println(bt.isTreeSymmetric());
 
-        Node i = bt.mirror();
+        Node<Integer> i = bt.mirror();
 
         System.out.println(i);
 

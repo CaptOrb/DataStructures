@@ -51,8 +51,13 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
         /** Relinks a parent node with its oriented child node. */
         private void relink(Node<Entry<K, V>> parent, Node<Entry<K, V>> child, boolean makeLeftChild) {
-// TODO
-         //   return null;
+            child.setParent(parent);
+
+            if (makeLeftChild) {
+                parent.setLeft(child);
+            } else {
+                parent.setRight(child);
+            }
         }
 
         /**
@@ -70,8 +75,24 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          * Caller should ensure that p is not the root.
          */
         public void rotate(Position<Entry<K, V>> p) {
-// TODO
-            //return null;
+            Node<Entry<K, V>> x = validate(p);
+            Node<Entry<K, V>> y = x.getParent();
+            Node<Entry<K, V>> z = y.getParent();
+
+            if (z == null) {
+                root = x;
+                x.setParent(null);
+            } else {
+                relink(z, x, y == z.getLeft());
+            }
+
+            if (x == y.getLeft()) {
+                relink(y, x.getRight(), true);
+                relink(x, y, false);
+            } else {
+                relink(y, x.getLeft(), false);
+                relink(x, y, true);
+            }
         }
 
         /**
@@ -104,8 +125,20 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          * Caller should ensure that x has a grandparent.
          */
         public Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) {
-            // TODO
-            return null;
+
+            Position<Entry<K, V>> y = parent(x);
+            Position<Entry<K, V>> z = parent(y);
+
+            if(x== right(y) == (y == right(z))){
+                rotate(y);
+                return y;
+            }
+            else {
+
+                rotate(x);
+                rotate(x);
+                return x;
+            }
         }
     } // ----------- end of nested BalanceableBinaryTree class -----------
 
@@ -315,6 +348,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
       if(isExternal(entryPosition)){
 
           expandExternal(entryPosition, entry);
+
+          rebalanceInsert(entryPosition);
           return null;
 
       } else{
@@ -344,6 +379,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         checkKey(key);
         Position<Entry<K, V>> p = treeSearch(root(), key);
         if (isExternal(p)){
+            System.out.println("OK NULL");
+            rebalanceAccess(p);
             return null;
         } else{
             V old = p.getElement().getValue();
@@ -351,16 +388,15 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
                 Position<Entry<K, V>> replacement = treeMax(left(p));
                 set(p, replacement.getElement());
                 p = replacement;
+
+                System.out.println("OK");
             }
-            Position<Entry<K, V>> leaf;
+            Position<Entry<K, V>> leaf = isExternal(left(p)) ?  left(p) : right(p);
 
-            if(isExternal(left(p))){
-                leaf = left(p);
-            } else
-                leaf = right(p);
-
+            Position<Entry<K, V>> sib = sibling(leaf);
             remove(leaf);
             remove(p);
+            rebalanceDelete(sib);
             return old;
         }
     }
