@@ -111,6 +111,8 @@ class LinkedBinaryTreeTest {
             another.addLeft(bt.root(), 1);
             another.addRight(bt.root(), 1);
 
+            another.remove(bt.root);
+
             fail("Should have thrown exception");
 
         } catch (IllegalArgumentException ignored) {}

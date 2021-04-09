@@ -8,8 +8,6 @@ import java.util.*;
 
 public class AVLTreeMap<K, V> extends TreeMap<K, V> {
 
-     protected BalanceableBinaryTree<K, V> tree = new BalanceableBinaryTree<>();
-
     /**
      * Constructs an empty map using the natural ordering of keys.
      */
@@ -165,7 +163,7 @@ public class AVLTreeMap<K, V> extends TreeMap<K, V> {
     }
 
     public String toBinaryTreeString() {
-        BinaryTreePrinter<Entry<K, V>> btp = new BinaryTreePrinter<>(tree);
+        BinaryTreePrinter<Entry<K, V>> btp = new BinaryTreePrinter<>(this.tree);
         return btp.print();
 
     }

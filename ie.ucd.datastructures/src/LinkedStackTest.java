@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinkedStackTest {
 
@@ -20,7 +21,7 @@ class LinkedStackTest {
 		for(int i = 0; i < 10; ++i) {
 			s.pop();
 		}
-		assertEquals(true, s.isEmpty());
+		assertTrue(s.isEmpty());
 	}
 
 	@Test
