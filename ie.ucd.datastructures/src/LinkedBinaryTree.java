@@ -487,13 +487,43 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return nodeA;
     }
 
-    public int dist(Node<E> nodeA, Node<E> nodeB){
-        if(nodeA == null || nodeB == null){
-            return 0;
+    public Node<Integer> LCA(Node<Integer> root, int a, int b) {
+        if (root == null) {
+            return null;
         }
-        else return (1 + dist(nodeA.getLeft(), nodeA.getRight()) + dist(nodeB.getLeft(), nodeB.getRight()));
+        if (root.getElement() == a || root.getElement() == b) {
+            return root;
+        }
+
+        Node<Integer> left = LCA(root.left, a, b);
+        Node<Integer> right = LCA(root.right, a, b);
+
+
+        if (left != null && right != null) {
+            return root;
+        }
+
+        if(left != null){
+            return left;
+        }
+        return right;
     }
 
+    public  int treeDistance(Node<Integer> root, int node1, int node2) {
+        if (root == null) return -1;
+        Node<Integer> lca = LCA(root, node1, node2);
+
+        return dist(lca, node1) + dist(lca, node2);
+    }
+    //gets distance between two points
+    private static int dist(Node src, int dest) {
+        if ((int)src.getElement() == dest) return 0;
+        Node node = src.left;
+        if ((int)src.getElement() < dest) {
+            node = src.right;
+        }
+        return 1 + dist(node, dest);
+    }
 
     public static void main(String[] args) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
@@ -541,7 +571,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         System.out.println("j " + bt.left(bt.root));
 
-        System.out.println(bt.dist(bt.root, (Node<Integer>) bt.left(bt.root)));
+        System.out.println(bt.left(bt.root.getLeft()));
+
+        System.out.println(bt.right(bt.root.getRight()));
+
+       // System.out.println("LCA " + bt.treeDistance(bt.root,  bt.left(bt.root.getLeft()).getElement(),  bt.right(bt.root.getRight()).getElement()));
 
 
         /*Position<Integer> p1 = bt.addLeft(root, 25);
