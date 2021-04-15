@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static java.util.stream.StreamSupport.stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SplayTreeMapTest {
@@ -132,7 +131,16 @@ class SplayTreeMapTest {
 
     @Test
     void testEntrySet() {
-        fail("Not yet implemented");
+        SplayTreeMap<Integer, String> map = new SplayTreeMap<>();
+        //java.util.TreeMap<Integer, String> map = new java.util.TreeMap<>();
+        Integer[] arr = new Integer[] {35,26,15,24,33,4,12,1,23,21,2,5};
+
+        for(Integer i : arr) {
+            map.put(i, Integer.toString(i));
+        }
+
+        assertEquals(map.entrySet().toString(), "[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]" );
+
     }
 
     @Test

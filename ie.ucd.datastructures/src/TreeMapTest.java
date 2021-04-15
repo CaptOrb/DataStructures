@@ -162,7 +162,7 @@ class TreeMapTest {
         assertEquals("[null, 1, null, 2, null, 4, null, 5, null, 12, null, 15, null, 21, null, 23, null, 24, null, 26, null, 33, null, 35, null]", map.toString());
     }
 
-/*    @Test
+   @Test
     void testSubMap() {
         //TreeMap<Integer, String> map = new TreeMap<>();
         java.util.TreeMap<Integer, String> map = new java.util.TreeMap<>();
@@ -173,6 +173,6 @@ class TreeMapTest {
         }
 
         assertEquals("[12, 15, 21, 23, 24, 26, 33]",map.subMap(12, 34).keySet().toString());
-    }*/
+    }
 
 }
