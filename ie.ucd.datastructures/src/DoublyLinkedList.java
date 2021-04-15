@@ -130,8 +130,6 @@ public class DoublyLinkedList<E> implements List<E> {
 
             E ret = oldNode.getData();
 
-            System.out.println(ret);
-
             // replace data in old node
             oldNode.setData(e);
 

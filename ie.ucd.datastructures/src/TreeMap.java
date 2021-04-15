@@ -389,8 +389,6 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
                 Position<Entry<K, V>> replacement = treeMax(left(p));
                 set(p, replacement.getElement());
                 p = replacement;
-
-                System.out.println("OK");
             }
             Position<Entry<K, V>> leaf = isExternal(left(p)) ?  left(p) : right(p);
 
