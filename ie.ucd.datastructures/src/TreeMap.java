@@ -323,6 +323,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     public V get(K key) throws IllegalArgumentException {
         Position<Entry<K,V>> p = treeSearch(root(), key);
 
+        rebalanceAccess(p);
+
         if(isExternal(p)){
             return null;
         }
@@ -379,7 +381,6 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         checkKey(key);
         Position<Entry<K, V>> p = treeSearch(root(), key);
         if (isExternal(p)){
-            System.out.println("OK NULL");
             rebalanceAccess(p);
             return null;
         } else{
@@ -577,8 +578,28 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      */
     @Override
     public Iterable<Entry<K, V>> subMap(K fromKey, K toKey) throws IllegalArgumentException {
-        // TODO
-        return null;
+
+        ArrayList<Entry<K, V>> buffer = new ArrayList<>();
+
+        for (Position<Entry<K, V>> pos : tree.inorder()) {
+
+            if (isExternal(pos)) {
+                continue;
+            }
+
+            if (compare(pos.getElement().getKey(), fromKey) < 0) {
+                continue;
+            }
+
+            if (compare(pos.getElement().getKey(), toKey) >= 0) {
+                break;
+            }
+
+            buffer.add(pos.getElement());
+        }
+
+
+        return buffer;
     }
 
     protected void rotate(Position<Entry<K, V>> p) {
