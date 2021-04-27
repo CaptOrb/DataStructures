@@ -640,6 +640,15 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
         System.out.println(treeMap.toBinaryTreeString());
 
+        System.out.println("Adding 100");
+        treeMap.put(100,100);
+        System.out.println(treeMap.toBinaryTreeString());
+
+        System.out.println("Removing 28");
+        treeMap.remove(28);
+        System.out.println(treeMap.toBinaryTreeString());
+
+
     }
 
 }

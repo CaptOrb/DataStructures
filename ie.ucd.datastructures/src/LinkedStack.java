@@ -55,10 +55,9 @@ public class LinkedStack<E> implements Stack<E> {
 
 		System.out.println(sll);
 
-		System.out.println(sll.top());
-		sll.pop();
-
-		System.out.println(sll.top());
+		System.out.println("The top element of the stack is: " + sll.top());
+		System.out.println(sll.pop() + " has been removed from the stack.");
+		System.out.println("The new top element of the stack is:" + sll.top());
 
 	}
 

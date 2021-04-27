@@ -47,17 +47,20 @@ public class LinkedDeque<E> implements Deque<E> {
 	public static void main(String[] args) {
 		LinkedDeque<Integer> ex = new LinkedDeque<>();
 
+		System.out.println("Adding 5 ");
 		ex.addFirst(5);
 
+		System.out.println("Adding 20 ");
 		ex.addLast(20);
 
-		System.out.println("At the start of the queue is " + ex.first());
+		System.out.println("At the start of the queue is: " + ex.first());
 
-		ex.addFirst(10);
+		System.out.println("Adding 10 ");
+		ex.addLast(10);
 
-		System.out.println("At the start of the queue is  " + ex.first());
+		System.out.println("At the start of the queue is: " + ex.first());
 
-		System.out.println("At the end of the queue is  " + ex.last());
+		System.out.println("At the end of the queue is: " + ex.last());
 
 	}
 

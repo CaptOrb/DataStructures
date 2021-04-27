@@ -46,14 +46,21 @@ public class LinkedQueue<E> implements Queue<E> {
     public static void main(String[] args) {
         ArrayQueue<Integer> ex = new ArrayQueue<Integer>(1000);
 
+        System.out.println("Enqueuing 5 ");
         ex.enqueue(5);
 
+        System.out.println("Enqueuing 10 ");
         ex.enqueue(10);
 
-        System.out.println("At the start of the queue is " + ex.first());
+        System.out.println("\n\nAt the start of the queue is: " + ex.first());
 
-        ex.dequeue();
+        System.out.println(ex.dequeue() + " has been removed from the queue");
 
-        System.out.println("t the start of the queue is  " + ex.first());
+        System.out.println("At the start of the queue is: " + ex.first());
+
+        System.out.println("\nEnqueuing 50 ");
+        ex.enqueue(50);
+
+        System.out.println("The size of the queue is " + ex.size());
     }
 }

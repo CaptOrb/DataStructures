@@ -29,12 +29,14 @@ public class ArrayStack<E> implements Stack<E> {
         data[++t] = e;
     }
 
+    // return element at top of stack
     @Override
     public E top() {
         if (isEmpty()) return null;
         return data[t];
     }
 
+    // pop the top element
     @Override
     public E pop() {
         if (isEmpty()) return null;

@@ -1,5 +1,6 @@
 import java.util.Iterator;
 
+// Doubly linked list implements our List ADT
 public class DoublyLinkedList<E> implements List<E> {
 
     //---------------- nested Node class ----------------

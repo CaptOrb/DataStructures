@@ -207,28 +207,22 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         }
     }
 
-    public static <T> String toBinaryTreeString(PriorityQueue<T> pq) {
-        LinkedBinaryTree<T> bt = new LinkedBinaryTree<>();
-        bt.createLevelOrder(new ArrayList<T>(pq));
-        BinaryTreePrinter<T> btp = new BinaryTreePrinter<>(bt);
-        return btp.print();
-    }
-
-
     public static void main(String[] args) {
-        //HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        //Integer [] rands = new Integer[]{44,17,88,8,32,65,97,28,54,82,93,21,29,76,68,80};
+        HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>();
+
         Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
 
         for (Integer i : rands) {
-            pq.add(i);
-            System.out.println(toBinaryTreeString(pq));
+            System.out.println("Adding " + i);
+            pq.insert(i, i);
+            System.out.println(pq);
         }
 
-        pq.add(34);
-        System.out.println(toBinaryTreeString(pq));
-    }
+        System.out.println(" Adding 34");
+        pq.insert(34, 34);
+        System.out.println(pq);
 
+        System.out.println(pq.removeMin() + " has been removed");
+    }
 
 }

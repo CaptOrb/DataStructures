@@ -3,6 +3,7 @@ import java.util.Iterator;
 
 /**
  * A basic singly linked list implementation.
+ * Implements our List ADT
  */
 public class SinglyLinkedList<E> implements Cloneable, Iterable<E>, List<E> {
     //---------------- nested Node class ----------------

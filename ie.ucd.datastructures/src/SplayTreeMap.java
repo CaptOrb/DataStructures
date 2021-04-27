@@ -126,14 +126,16 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
         });
         
 
-        System.out.println("treeMap \n" + treeMap.toBinaryTreeString());
-        treeMap.get(12);
+        System.out.println(treeMap.toBinaryTreeString());
+        System.out.println("Value at key 12 is " + treeMap.get(12));
 
-        System.out.println("treeMap \n" + treeMap.toBinaryTreeString());
-        treeMap.remove(1);
+        System.out.println("\nRemoving 11");
+        treeMap.remove(11);
+        System.out.println(treeMap.toBinaryTreeString());
 
 
-        System.out.println("treeMap \n" + treeMap.toBinaryTreeString());
+        treeMap.put(50,50);
+        System.out.println("Added 50 \n" + treeMap.toBinaryTreeString());
 
     }
 }

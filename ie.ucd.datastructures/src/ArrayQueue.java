@@ -80,15 +80,17 @@ public class ArrayQueue<E> implements Queue<E> {
     public static void main(String[] args) {
         ArrayQueue<Integer> ex = new ArrayQueue<Integer>(1000);
 
+        System.out.println("Enqueuing 5 ");
         ex.enqueue(5);
 
+        System.out.println("Enqueuing 10 ");
 		ex.enqueue(10);
 
-        System.out.println("At the first is " + ex.first());
+        System.out.println("At the first of the queue is " + ex.first());
 
-        ex.dequeue();
+        System.out.println("Deque 5" + ex.dequeue());
 
-		System.out.println("At the first is " + ex.first());
+		System.out.println("At the first of the queue is " + ex.first());
 
     }
 }

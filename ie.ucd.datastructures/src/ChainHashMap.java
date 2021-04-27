@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -31,50 +30,31 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
         super(cap, p);
     }
 
-    public void resize(int newCapacity){
-         // make empty array
-        UnsortedTableMap<K,V> [] newTable = new UnsortedTableMap[newCapacity];
-
-        for(int i =0; i < capacity; ++i){
-            UnsortedTableMap<K,V> bucket = table[i];
-
-         //   int newHash = hashValue(bucket.table.get(0));
-
-        //    newTable[newHash] = bucket;
-        }
-    }
 
     public static void main(String[] args) {
-        //HashMap<Integer, String> m = new HashMap<Integer, String>();
-        ChainHashMap<Integer, String> m = new ChainHashMap<Integer, String>();
+        //HashMap<Integer, String> chainHashMap = new HashMap<Integer, String>();
+        ChainHashMap<Integer, String> chainHashMap = new ChainHashMap<Integer, String>();
 
-        System.out.println(m.hashValue(1) + m.hashValue(10));
+        System.out.println(chainHashMap.hashValue(1) + chainHashMap.hashValue(10));
 
-        m.put(1, "One");
-        m.put(10, "Ten");
-        m.put(11, "Eleven");
-        m.put(20, "Twenty");
+        chainHashMap.put(1, "One");
+        chainHashMap.put(10, "Ten");
+        chainHashMap.put(11, "Eleven");
+        chainHashMap.put(20, "Twenty");
 
-        Random rnd = new Random();
         int n = 17 * 10;
 
-        System.out.println("m: " + m);
+        System.out.println("ChainHashMap contains:  " + chainHashMap);
 
-        m.remove(11);
-        System.out.println("m: " + m);
+        chainHashMap.remove(11);
+        System.out.println("ChainHashMap contains:  " + chainHashMap);
 
         for(int i = 0 ; i < n; ++i){
-            m.put(i, "test");
+            chainHashMap.put(i, "test");
         }
-        System.out.println("m: " + m);
+        System.out.println("ChainHashMap contains: " + chainHashMap);
 
-
-//		ChainHashMap<String, Integer> counter = new ()//;
-//		// Scanner from file
-//		for(String word : scanner) {
-//			Integer old_count = counter.get(word);
-//			counter.put(old_count + 1);
-//		}
+        System.out.println("Value at position 0: " + chainHashMap.get(0));
     }
 
     /**
@@ -113,8 +93,8 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
     protected V bucketPut(int h, K k, V v) {
         UnsortedTableMap<K,V> bucket = table[h];
 
-        if(bucket == null){
-            bucket = new UnsortedTableMap<K,V>();
+        if(bucket == null) {
+            bucket = new UnsortedTableMap<K, V>();
 
             table[h] = bucket;
 
