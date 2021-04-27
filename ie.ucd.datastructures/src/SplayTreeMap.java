@@ -77,7 +77,7 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
      */
     //@Override
     protected void rebalanceDelete(Position<Entry<K, V>> p) {
-        if(!isRoot(p))
+        if (!isRoot(p))
             splay(parent(p));
     }
 
@@ -85,7 +85,7 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
         return tree.toString();
     }
 
-    public String toBinaryTreeString(){
+    public String toBinaryTreeString() {
         return tree.toBinaryTreeString();
     }
 
@@ -113,8 +113,8 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
 
         //Integer[] arr = new Integer[]{44, 17, 88, 8, 32, 65, 97, 28, 54, 82, 93, 21,
         //        29, 76, 80};
-        Integer[] arr = new Integer[]{8,3,10,4,11,6,12,5,7,16,13,17,14};
-       // Integer[] arr = new Integer[]{1, 3, 2, 4};
+        Integer[] arr = new Integer[]{8, 3, 10, 4, 11, 6, 12, 5, 7, 16, 13, 17, 14};
+        // Integer[] arr = new Integer[]{1, 3, 2, 4};
         List<Integer> intList = Arrays.asList(arr);
         //Collections.shuffle(intList);
         //Collections.sort(intList, Collections.reverseOrder());
@@ -124,7 +124,7 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
             treeMap.put(x, x);
 
         });
-        
+
 
         System.out.println(treeMap.toBinaryTreeString());
         System.out.println("Value at key 12 is " + treeMap.get(12));
@@ -134,7 +134,7 @@ public class SplayTreeMap<K, V> extends TreeMap<K, V> {
         System.out.println(treeMap.toBinaryTreeString());
 
 
-        treeMap.put(50,50);
+        treeMap.put(50, 50);
         System.out.println("Added 50 \n" + treeMap.toBinaryTreeString());
 
     }

@@ -57,13 +57,13 @@ public class ArrayStack<E> implements Stack<E> {
         StringBuilder s = new StringBuilder();
 
         s.append("[");
-        for (int i = data.length - 1; i >= 0 ; i--) {
+        for (int i = data.length - 1; i >= 0; i--) {
 
-            if(data[i] != null)
-            s.append(data[i]).append(", ");
+            if (data[i] != null)
+                s.append(data[i]).append(", ");
         }
         if (s.length() > 2)
-            s.delete(s.length() - 2 , s.length());
+            s.delete(s.length() - 2, s.length());
         s.append("]");
         return s.toString();
     }

@@ -7,20 +7,27 @@ import java.util.NoSuchElementException;
  */
 
 public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
-    /** Underlying storage for the map of entries. */
+    /**
+     * Underlying storage for the map of entries.
+     */
     private ArrayList<MapEntry<K, V>> table = new ArrayList<>();
 
-    /** Constructs an initially empty map. */
+    /**
+     * Constructs an initially empty map.
+     */
     public UnsortedTableMap() {
     }
 
     // private utility
-    /** Returns the index of an entry with equal key, or -1 if none found. */
+
+    /**
+     * Returns the index of an entry with equal key, or -1 if none found.
+     */
     private int findIndex(K key) {
         int n = table.size();
 
-        for(int j = 0; j < n; j++){
-            if(table.get(j).getKey().equals(key)){
+        for (int j = 0; j < n; j++) {
+            if (table.get(j).getKey().equals(key)) {
                 return j;
             }
         }
@@ -28,6 +35,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
     }
 
     // public methods
+
     /**
      * Returns the number of entries in the map.
      *
@@ -50,7 +58,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
 
         int i = findIndex(key);
 
-        return i == -1 ? null: table.get(i).getValue();
+        return i == -1 ? null : table.get(i).getValue();
     }
 
     /**
@@ -61,15 +69,15 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      * @param key   key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the previous value associated with the key (or null, if no such
-     *         entry)
+     * entry)
      */
     @Override
     public V put(K key, V value) {
 
         int i = findIndex(key);
 
-        if(i == -1){
-            table.add(new MapEntry<K,V>(key, value));
+        if (i == -1) {
+            table.add(new MapEntry<K, V>(key, value));
             return null;
         }
         return table.get(i).setValue(value);
@@ -81,7 +89,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      *
      * @param key the key whose entry is to be removed from the map
      * @return the previous value associated with the removed key, or null if no
-     *         such entry exists
+     * such entry exists
      */
     @Override
     public V remove(K key) {
@@ -104,7 +112,7 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
         }
 
         public Entry<K, V> next() {
-            if(j == table.size()) throw new NoSuchElementException();
+            if (j == table.size()) throw new NoSuchElementException();
             return table.get(j++);
         }
 

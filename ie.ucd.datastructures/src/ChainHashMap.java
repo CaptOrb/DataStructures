@@ -49,7 +49,7 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
         chainHashMap.remove(11);
         System.out.println("ChainHashMap contains:  " + chainHashMap);
 
-        for(int i = 0 ; i < n; ++i){
+        for (int i = 0; i < n; ++i) {
             chainHashMap.put(i, "test");
         }
         System.out.println("ChainHashMap contains: " + chainHashMap);
@@ -76,7 +76,7 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
      */
     @Override
     protected V bucketGet(int h, K k) {
-        UnsortedTableMap<K,V> bucket = table[h];
+        UnsortedTableMap<K, V> bucket = table[h];
         return bucket == null ? null : bucket.get(k);
     }
 
@@ -91,9 +91,9 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
      */
     @Override
     protected V bucketPut(int h, K k, V v) {
-        UnsortedTableMap<K,V> bucket = table[h];
+        UnsortedTableMap<K, V> bucket = table[h];
 
-        if(bucket == null) {
+        if (bucket == null) {
             bucket = new UnsortedTableMap<K, V>();
 
             table[h] = bucket;
@@ -139,10 +139,10 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
 			for each element in bucket:
 				print element
 		*/
-        ArrayList<Entry<K,V>> buffer = new ArrayList<>();
+        ArrayList<Entry<K, V>> buffer = new ArrayList<>();
 
-        for(int i = 0; i< capacity; i++){
-            if(table[i] != null) {
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null) {
                 for (Entry<K, V> k : table[i].entrySet()) {
                     buffer.add(k);
                 }
