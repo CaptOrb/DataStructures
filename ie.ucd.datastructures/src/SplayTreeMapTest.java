@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -30,8 +31,11 @@ class SplayTreeMapTest {
             map.put(i, Integer.toString(i));
         }
 
-        List<Integer> res =  StreamSupport.stream(map.keySet().spliterator(), false).collect(Collectors.toList());
-        assertEquals("[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]", res.toString());
+        List<Integer> keySet =  StreamSupport.stream(map.keySet().spliterator(), false).collect(Collectors.toList());
+        List<Entry<Integer, String>> entrySet =  StreamSupport.stream(map.entrySet().spliterator(), false).collect(Collectors.toList());
+
+        assertEquals("[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]", keySet.toString());
+        assertEquals("[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]", entrySet.toString());
     }
 
     @Test
@@ -71,6 +75,7 @@ class SplayTreeMapTest {
         }
 
         assertEquals(35, map.lastEntry().getKey());
+        assertEquals("35", map.lastEntry().getValue());
     }
 
     @Test

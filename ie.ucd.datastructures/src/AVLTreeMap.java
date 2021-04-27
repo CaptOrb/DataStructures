@@ -47,7 +47,11 @@ public class AVLTreeMap<K, V> extends TreeMap<K, V> {
 
         System.out.println(avl.toBinaryTreeString());
 
-        //avl.remove(5);
+        System.out.println("Removing key 17");
+        avl.remove(17);
+        System.out.println(avl.toBinaryTreeString());
+
+        System.out.println("Adding key 12");
         avl.put(12, 12);
         //avl.put(8,8);
        // avl.remove(53);

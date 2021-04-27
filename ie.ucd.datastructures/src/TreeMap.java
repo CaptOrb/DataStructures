@@ -1,6 +1,4 @@
-import java.util.List;
 import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * An implementation of a sorted map using a binary search tree.
@@ -134,7 +132,6 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
                 return y;
             }
             else {
-
                 rotate(x);
                 rotate(x);
                 return x;

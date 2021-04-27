@@ -1,9 +1,6 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 public class SplayTreeMap<K, V> extends TreeMap<K, V> {
 
