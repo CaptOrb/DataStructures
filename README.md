@@ -29,5 +29,5 @@
 
 ## Acknowledgements
 
-* Dr Aonghus Lawlor
-* Data Structures and Algorithms in Java book
+* Dr Aonghus Lawlor UCD
+* Data Structures and Algorithms in Java by Michael T. Goodrich and Roberto Tamassia
